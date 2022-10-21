@@ -16,7 +16,7 @@
 #include <string>
 
 /**
- * @brief Caixa de emails.
+ * @brief Email.
  */
 class Mail
 {
@@ -79,7 +79,7 @@ public:
 };
 
 /**
- * @brief Definicação da classe para armazenar dados de arquivos graficos do tipo PGM.
+ * @brief Definicação da classe para caixa de emails.
  *
  */
 class MailBox
