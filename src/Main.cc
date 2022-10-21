@@ -9,34 +9,12 @@
 #define CONSULTA "CONSULTA"
 #define ENTREGA "ENTREGA"
 
-<<<<<<< HEAD
-int main(/*char** argv, int argc */) {
-	std::string inputFilename("C:\\Users\\Chrystian Melo\\Desktop\\Teste\\amostra-testes\\input2.txt");//(argv[1]);
-	std::string outputFilename("C:\\Users\\Chrystian Melo\\Desktop\\Teste\\amostra-testes\\saida.txt");//(argv[2]);
-
-	Users users = Users();
-=======
-User *getUser(User *users, int size, int id)
+int main(/*char *argv, int argc */)
 {
-	User *found = nullptr;
-	for (int i = 0; i < size; i++)
-	{
-		if (users[i].getId() == id)
-		{
-			found = users + i;
-			break;
-		}
-	}
-	return found;
-}
-
-int main(/*char** argv, int argc */)
-{
-	std::string inputFilename("input1.txt"); //(argv[1]);
+	std::string inputFilename("input2.txt"); //(argv[1]);
 	std::string outputFilename("saida.txt"); //(argv[2]);
 
-	User *users = (User *)malloc(0 * sizeof(User));
->>>>>>> a3124e1463a91704b75ad7671abd9bba78658d70
+	Users users = Users();
 	int size = 0;
 
 	// Inicia a leitura do arquivo de entrada.
@@ -49,70 +27,26 @@ int main(/*char** argv, int argc */)
 	std::string line("");
 	while (getline(myfileInput, line))
 	{
+
 		auto pos = line.find(' ');
 		std::string command(line.substr(0, pos));
 		line = line.substr(pos + 1, line.size() - 1);
 
-<<<<<<< HEAD
-		if (command == CADASTRA) {
+		if (command == CADASTRA)
+		{
 			int id = stoi(line);
-			User* user = users.getUserById(id);
-			if (user == nullptr) {
+			User *user = users.getUserById(id);
+			if (user == nullptr)
+			{
 				size++;
 
 				users.add(id);
 
 				myfile << "OK: CONTA " << id << " CADASTRADA" << std::endl;
 			}
-			else if (user->isRemoved()) {
-				user->setRemoved(false);
-				myfile << "OK: CONTA " << id << " CADASTRADA" << std::endl;
-			}
-			else {
-				myfile << "ERRO: CONTA " << id << " JA EXISTENTE" << std::endl;
-			}
-		}
-		else if (command == REMOVE) {
-			std::string id(line);
-
-			User* user = users.getUserById(stoi(id));
-
-			if (user == nullptr) {
-				myfile << "ERRO: CONTA " << id << " NAO EXISTE" << std::endl;
-			}
-			else if (user->isRemoved()) {
-				myfile << "ERRO: CONTA " << id << " NAO EXISTE" << std::endl;
-			}
-			else {
-				users.defineAsRemoved(stoi(id));
-				myfile << "OK: CONTA " << id << " REMOVIDA" << std::endl;
-			}
-		}
-		else if (command == CONSULTA) {
-			std::string id(line);
-			User* user = users.getUserById(stoi(id));
-
-			if (user == nullptr)
-				myfile << "ERRO: CONTA " << id << " NAO EXISTE" << std::endl;
 			else if (user->isRemoved())
-				myfile << "ERRO: CONTA " << id << " NAO EXISTE" << std::endl;
-			else {
-				MailBox* box = user->getBox();
-				if (box->getSize() == 0)
-					myfile << "CONSULTA " << id << ": CAIXA DE ENTRADA VAZIA" << std::endl;
-				else {
-=======
-		if (command == CADASTRA)
-		{
-			std::string id(line);
-			if (getUser(users, size, stoi(id)) == nullptr)
 			{
-				size++;
-				current_id++;
-
-				users = (User *)realloc(users, size * sizeof(User));
-				*(users + (size - 1)) = User(current_id);
-
+				user->setRemoved(false);
 				myfile << "OK: CONTA " << id << " CADASTRADA" << std::endl;
 			}
 			else
@@ -120,14 +54,35 @@ int main(/*char** argv, int argc */)
 				myfile << "ERRO: CONTA " << id << " JA EXISTENTE" << std::endl;
 			}
 		}
-		else if (command == CONSULTA)
+		else if (command == REMOVE)
 		{
 			std::string id(line);
-			User *user = getUser(users, size, stoi(id));
+
+			User *user = users.getUserById(stoi(id));
+
 			if (user == nullptr)
 			{
 				myfile << "ERRO: CONTA " << id << " NAO EXISTE" << std::endl;
 			}
+			else if (user->isRemoved())
+			{
+				myfile << "ERRO: CONTA " << id << " NAO EXISTE" << std::endl;
+			}
+			else
+			{
+				users.defineAsRemoved(stoi(id));
+				myfile << "OK: CONTA " << id << " REMOVIDA" << std::endl;
+			}
+		}
+		else if (command == CONSULTA)
+		{
+			std::string id(line);
+			User *user = users.getUserById(stoi(id));
+
+			if (user == nullptr)
+				myfile << "ERRO: CONTA " << id << " NAO EXISTE" << std::endl;
+			else if (user->isRemoved())
+				myfile << "ERRO: CONTA " << id << " NAO EXISTE" << std::endl;
 			else
 			{
 				MailBox *box = user->getBox();
@@ -135,7 +90,6 @@ int main(/*char** argv, int argc */)
 					myfile << "CONSULTA " << id << ": CAIXA DE ENTRADA VAZIA" << std::endl;
 				else
 				{
->>>>>>> a3124e1463a91704b75ad7671abd9bba78658d70
 					myfile << "CONSULTA " << id << ": " << box->pop() << std::endl;
 				}
 			}
@@ -156,25 +110,16 @@ int main(/*char** argv, int argc */)
 			line = line.substr(0, pos);
 
 			std::string msg(line);
-<<<<<<< HEAD
-			User* user = users.getUserById(stoi(id));
-			if (user == nullptr) {
-				myfile << "ERRO: CONTA " << id << " NAO EXISTE" << std::endl;
-			}
-			else if (user->isRemoved())
-				myfile << "ERRO: CONTA " << id << " NAO EXISTE" << std::endl;
-			else {
-				MailBox* box = user->getBox();
-=======
-			User *user = getUser(users, size, stoi(id));
+			User *user = users.getUserById(stoi(id));
 			if (user == nullptr)
 			{
 				myfile << "ERRO: CONTA " << id << " NAO EXISTE" << std::endl;
 			}
+			else if (user->isRemoved())
+				myfile << "ERRO: CONTA " << id << " NAO EXISTE" << std::endl;
 			else
 			{
 				MailBox *box = user->getBox();
->>>>>>> a3124e1463a91704b75ad7671abd9bba78658d70
 				box->insert(stoi(priority), msg);
 				myfile << "OK: MENSAGEM PARA " << id << " ENTREGUE" << std::endl;
 			}

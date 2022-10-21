@@ -1,11 +1,7 @@
 /**
  * @file User.h
  * @author Chrystian Melo (meloo.chrys@gmail.com)
-<<<<<<< HEAD
- * @brief
-=======
- * @brief Representação do usuário.
->>>>>>> a3124e1463a91704b75ad7671abd9bba78658d70
+ * @brief Classe armazenando informaçoẽs do usário.
  * @version 0.1
  * @date 2022-10-18
  *
@@ -15,13 +11,12 @@
 
 #ifndef USER_H
 #define USER_H
-
 #include <iostream>
-
 #include "MailBox.h"
 
 /**
- * @brief Definição da classe representando o usuário.
+ * @brief Definicação da classe para armazenar as informaçoẽs do usário.
+ *
  */
 class User
 {
@@ -31,60 +26,72 @@ private:
 	 */
 	int m_id;
 
-<<<<<<< HEAD
+	/**
+	 * @brief Caixa de emails.
+	 */
 	MailBox m_box;
 
-	User* m_next;
+	/**
+	 * @brief Próximo usuário.
+	 */
+	User *m_next;
 
+	/**
+	 * @brief Flag representando se o usuário está definido como excluído.
+	 */
 	bool m_isRemoved;
-public:
-	User(int id);
-
-	~User();
-
-	void terminate();
-
-	int getId();
-
-	MailBox* getBox();
-
-	User* getNext();
-
-	void setNext(User* next);
-
-	bool isRemoved();
-
-	void setRemoved(bool value);
-=======
-	/**
-	 * @brief Caixa de mensagens do usuário.
-	 */
-	MailBox box;
-
-	/**
-	 * @brief Proximo usuário.
-	 */
-	User *next;
 
 public:
 	/**
 	 * @brief Contrutor da classe
+	 *
+	 * @param id Identificador unico do usuário.
 	 */
 	User(int id);
 
 	/**
-	 * @brief Retorna o identificador unico do usuário.
+	 * @brief Destrutor da classe
+	 */
+	~User();
+
+	/**
+	 * @brief Finaliza os usos de memória da classe.
+	 */
+	void terminate();
+
+	/**
+	 * @brief Retorna o dentificador unico do usuário.
 	 */
 	int getId();
 
 	/**
-	 * @brief Retorna a caixa de mensagens do usuário.
+	 * @brief Retorna a caixa de emails.
 	 */
 	MailBox *getBox();
 
-	User *getNext() { return next; }
-	void setNext(User *u) { next = u; }
->>>>>>> a3124e1463a91704b75ad7671abd9bba78658d70
+	/**
+	 * @brief Retorna o proximo usuario.
+	 *
+	 * @return Proximo usuario.
+	 */
+	User *getNext();
+
+	/**
+	 * @brief Define o proximo usuario.
+	 *
+	 * @param next Proximo usuário.
+	 */
+	void setNext(User *next);
+
+	/**
+	 * @brief Retorna a flag representando se o usuário está definido como excluído.
+	 */
+	bool isRemoved();
+
+	/**
+	 * @brief Define a flag representando se o usuário está definido como excluído.
+	 */
+	void setRemoved(bool value);
 };
 
 #endif
