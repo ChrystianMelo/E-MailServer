@@ -16,23 +16,63 @@
 
 #include "User.h"
 
- /**
-  * @brief Definica��o da classe para armazenar usuarios
-  *
-  */
+/**
+ * @brief Definição da classe para armazenar usuarios
+ *
+ */
 class Users
 {
 private:
-	User* m_top;
-	int m_size;
-public:
-	Users();
-	~Users();
-	void add(int userId);
-	void rm(int userId);
-	User* getUserById(int id);
+	/**
+	 * @brief Primeiro usuário.
+	 */
+	User *m_top;
 
+	/**
+	 * @brief Quantidade de usuários.
+	 */
+	int m_size;
+
+public:
+	/**
+	 * @brief Construtor da classe.
+	 */
+	Users();
+
+	/**
+	 * @brief Destrutor da classe.
+	 */
+	~Users();
+
+	/**
+	 * @brief Adiciona usuário.
+	 *
+	 * @param id Id do novo usuário.
+	 */
+	void add(int userId);
+
+	/**
+	 * @brief Remove usuário(parcialmente).
+	 *
+	 * @param id Id do usuário a ser removido.
+	 */
 	void defineAsRemoved(int userId);
+
+	/**
+	 * @brief Remove usuário (completamente).
+	 *
+	 * @param id Id do usuário a ser removido.
+	 */
+	void rm(int userId);
+
+	/**
+	 * @brief Retorna o usuário com o id especificado.
+	 *
+	 * @param id Id do usuário buscado.
+	 *
+	 * @return Usuario encontrado ou nullptr.
+	 */
+	User *getUserById(int id);
 };
 
 #endif

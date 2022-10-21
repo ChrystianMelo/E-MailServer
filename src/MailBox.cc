@@ -12,17 +12,20 @@
 #include "MailBox.h"
 
 Mail::Mail(std::string message, int priority) : m_message(message), m_priority(priority), m_next(nullptr) {}
+
 std::string Mail::getMsg() { return m_message; }
+
 int Mail::getPriority() { return m_priority; }
+
 void Mail::setNext(Mail *next) { m_next = next; }
+
 void Mail::setNext(std::string msg, int priority) { m_next = new Mail(msg, priority); }
+
 Mail *Mail::getNext() { return m_next; }
 
 MailBox::MailBox() : m_size(0) {}
 
-MailBox::~MailBox()
-{
-}
+MailBox::~MailBox() {}
 
 int MailBox::getSize() { return m_size; }
 

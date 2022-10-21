@@ -16,7 +16,7 @@
 #include <string>
 
 /**
- * @brief Definição da classe que representa o email.
+ * @brief Caixa de emails.
  */
 class Mail
 {
@@ -25,6 +25,7 @@ private:
 	 * @brief Conteudo do email.
 	 */
 	std::string m_message;
+
 	/**
 	 * @brief Prioridade do email.
 	 */
@@ -40,9 +41,10 @@ public:
 	 * @brief Construtor da classe.
 	 *
 	 * @param message 	Conteudo do email.
-	 * @param priority	Prioridade do email.
+	 * @param priority 	Prioridade do email.
 	 */
 	Mail(std::string message, int priority);
+
 	/**
 	 * @brief Retorna o conteudo do email.
 	 */
@@ -54,10 +56,25 @@ public:
 	int getPriority();
 
 	/**
-	 * @brief Prioridade do email.
+	 * @brief Define o proximo email.
+	 *
+	 * @param next Proximo email.
 	 */
 	void setNext(Mail *next);
+
+	/**
+	 * @brief Define o proximo email.
+	 *
+	 * @param message 	Conteudo do email.
+	 * @param priority 	Prioridade do email.
+	 */
 	void setNext(std::string msg, int priority);
+
+	/**
+	 * @brief Retorna o proximo email.
+	 *
+	 * @return Proximo email ou nullptr.
+	 */
 	Mail *getNext();
 };
 
@@ -68,16 +85,45 @@ public:
 class MailBox
 {
 private:
+	/**
+	 * @brief Quantidade de mensagens na caixa de entrada.
+	 */
 	int m_size;
+
+	/**
+	 * @brief Primeira mensagem na caixa de entrada.
+	 */
 	Mail *m_top;
 
 public:
+	/**
+	 * @brief Construtor da classe.
+	 */
 	MailBox();
 
+	/**
+	 * @brief Destrutor da classe.
+	 */
 	~MailBox();
+
+	/**
+	 * @brief Retorna a quantidade de emails na caixa de entrada.
+	 */
 	int getSize();
-	std::string toString();
+
+	/**
+	 * @brief Adiciona uma mensagem na caixa de entrada.
+	 *
+	 * @param message 	Conteudo do email.
+	 * @param priority 	Prioridade do email.
+	 */
 	void insert(int priority, std::string message);
+
+	/**
+	 * @brief Remove a primeira mensagem.
+	 *
+	 * @return Retorna o conteudo da mensagem.
+	 */
 	std::string pop();
 };
 
