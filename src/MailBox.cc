@@ -10,6 +10,8 @@
  */
 
 #include "MailBox.h"
+#include "msgassert.h"
+#include "memlog.h"
 
 Mail::Mail(std::string message, int priority) : m_message(message), m_priority(priority), m_next(nullptr) {}
 
@@ -31,6 +33,7 @@ int MailBox::getSize() { return m_size; }
 
 void MailBox::insert(int priority, std::string message)
 {
+	Mail *actualMail = m_top;
 	if (m_size == 0)
 	{
 		m_top = new Mail(message, priority);
@@ -39,14 +42,12 @@ void MailBox::insert(int priority, std::string message)
 	{
 		if (priority > m_top->getPriority())
 		{
-			Mail *actualMail = m_top;
 			m_top = new Mail(message, priority);
 			m_top->setNext(actualMail);
 		}
 		else
 		{
 			Mail *previousMail = m_top;
-			Mail *actualMail = m_top;
 
 			for (int i = 0; i < m_size; i++)
 			{
@@ -64,6 +65,9 @@ void MailBox::insert(int priority, std::string message)
 		}
 	}
 	m_size++;
+
+	// Faz o registro de memoria
+	ESCREVEMEMLOG((long int)(actualMail), sizeof(int), 1);
 }
 
 std::string MailBox::pop()

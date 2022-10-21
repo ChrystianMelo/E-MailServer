@@ -63,7 +63,7 @@ public:
 	 *
 	 * @param id Id do usuário a ser removido.
 	 */
-	void rm(int userId);
+	// void rm(int userId);
 
 	/**
 	 * @brief Retorna o usuário com o id especificado.

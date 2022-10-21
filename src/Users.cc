@@ -10,6 +10,8 @@
  */
 
 #include "Users.h"
+#include "msgassert.h"
+#include "memlog.h"
 
 Users::Users() : m_size(0), m_top(nullptr)
 {
@@ -26,18 +28,22 @@ Users::~Users()
 
 void Users::add(int userId)
 {
+	User *lastUser = m_top;
 	if (m_size == 0)
 		m_top = new User(userId);
 	else
 	{
-		User *lastUser = m_top;
 		for (int i = 1; i < m_size; i++)
 			lastUser = lastUser->getNext();
 		lastUser->setNext(new User(userId));
 	}
 	m_size++;
+
+	// Faz o registro de memoria
+	ESCREVEMEMLOG((long int)(&(lastUser)), sizeof(int), lastUser->getId());
 }
 
+/*
 void Users::rm(int userId)
 {
 	User *actuaUser = m_top;
@@ -74,6 +80,7 @@ void Users::rm(int userId)
 		m_size--;
 	}
 }
+*/
 
 void Users::defineAsRemoved(int userId)
 {
@@ -91,15 +98,10 @@ void Users::defineAsRemoved(int userId)
 	}
 	else
 	{
-		User *previousUser = m_top;
-
 		for (int i = 1; i < m_size; i++)
 		{
 			if (actuaUser->getId() != userId)
-			{
-				previousUser = actuaUser;
 				actuaUser = actuaUser->getNext();
-			}
 			else
 				break;
 		}
